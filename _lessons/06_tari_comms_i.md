@@ -26,9 +26,14 @@ In this lesson we'll discuss:
 ## The `tari_comms` and `tari_comms_dht` crates
 
 Underlying the Tari network are two crates, namely `tari_comms` and `tari_comms_dht`.
-At it's core, `tari_comms` is responsible for keeping a peer list and establishing/accepting
-secure connections to/from those peers. The `tari_comms_dht` crate contains the Tari DHT code and
-uses `tari_comms` to form a DHT network. It provides interfaces that allow for peer discovery and
+
+At it's core, `tari_comms` is responsible for
+* keeping a peer list and
+* establishing/accepting secure connections to/from those peers.
+
+The `tari_comms_dht` crate contains the Tari DHT code and uses `tari_comms` to form a DHT network.
+
+It provides interfaces that allow for peer discovery and
 message propagation, as well as a message pipeline (essentially inbound/outbound middlewares)
 that processes message envelopes flowing to/from peers.
 
@@ -59,9 +64,13 @@ a working example, checkout the tari repo and look in the examples folder in `co
 Every connection needs to start somewhere, and in the `tari_comms` crate it starts with the `Transport` trait.
 This trait is an abstraction of the different methods that exist to transfer data between nodes.
 It exposes two functions, namely `listen` and `dial`. Both of these functions take a single multi-address argument.
-Every implementer of this trait needs to provide the code required to connect to (called `dial` to remind you to
-phone your grandmother) or to listen on the given address. Of course, not every kind of address is supported by every transport
-and the transport will error if given an address it does not know how to deal with. This is ok and part of the `Transport` contract.
+
+Every implementation of this trait needs to provide the code required to
+* connect to an address (it's called `dial` to remind you to phone your grandmother)
+* listen on the given address.
+
+Of course, not every kind of address is supported by every transport and the transport will error if given an address it does not know how to deal with. This is ok and part of the
+`Transport` contract.
 
 The following `Transport` implementations are provided:
 
@@ -70,8 +79,7 @@ The following `Transport` implementations are provided:
 The `TcpTransport` listens on and establishes connections over TCP. Under the hood, it uses `tokio`'s asynchonous
 [`TcpStream`](https://docs.rs/tokio/0.1.12/tokio/net/struct.TcpStream.html).
 
-It supports speaking the TCP protocol at IPv4 and IPv6 endpoints. In multi-address format this is written as
-for e.g.`/ip4/1.2.3.4/tcp/18141` or `/ip6/::1/tcp/8080`.
+It supports speaking the TCP protocol at IPv4 and IPv6 endpoints. In multi-address format, examples are `/ip4/1.2.3.4/tcp/18141` or `/ip6/::1/tcp/8080`.
 
 - `SocksTransport`
 
@@ -89,16 +97,16 @@ All .onion addresses are routed through the `SocksTransport` and all TCP address
 
 - `MemoryTransport`
 
-The `MemoryTransport` mimics an internet socket without any IO and is used extensively in unit and integration tests.
-Under the hood it uses `future-rs` mpsc channels and therefore it can only transport data in-process. If you've used zeroMQ this is
-similar to the `inproc` transport.
+The `MemoryTransport` mimics an internet socket without any I/O and is used extensively in unit and integration tests. Under the hood it uses `future-rs` mpsc channels and
+therefore it can only transport data in-process. If you've used zeroMQ this is similar to the `inproc` transport.
 
-The _memorynet_ example in the `tari_comms_dht` code uses this transport to bring up a network of noddes who attempt to discover each
-other all in memory!
+The
+[_memorynet_ example](https://github.com/tari-project/tari/tree/development/comms/dht/examples/memory_net) in the `tari_comms_dht` code uses this transport to bring up a network of
+nodes that attempt to discover each other all in memory.
 
 ## Anatomy of a p2p connection
 
-Now that we've covered the different transport options, let's do a deeper dive into how each p2p connection is established.
+Now that we've covered the different transport options, let's take a deeper dive into how each p2p connection is established.
 
 For the purposes of this section, let's invoke our _untrusted_ friends Alice and Bob. Alice (the initiator) wants
 to connect to Bob (the responder).
@@ -120,13 +128,13 @@ Alice starts by sending a single hard-coded byte that identifies that she wants 
 
 ### 2. Noise Protocol Handhake
 
-Without delay, she begins the noise protocol IX handshake. You can read more about the handshake at:[https://noiseprotocol.org/noise.html].
+Without delay, she begins the [noise protocol IX handshake](https://noiseprotocol.org/noise.html#interactive-handshake-patterns-fundamental).
 
 Once both sides have completed their parts of the handshake, we say that the connection has been "upgraded".
 Connection upgrades are just another way of saying that both sides agree on how to continue communications.
 In this case, both sides have agreed on how to encrypt further data sent between them.
 
-In additon to this, the handshake has proven to Alice that she is speaking to Bob (or someone with Bob's private key).
+In addition to this, the handshake has proven to Alice that she is speaking to Bob (or someone with Bob's private key).
 
 ### 3. Multiplexing
 
@@ -146,13 +154,11 @@ themselves with other messages sent over that connection.
 
 #### Negotiating a Substream
 
-If Bob wants to open a new substream, Bob asks Alice to open a new channel. As the initiator of the substream, he
-must send let Alice know the protocol he wants to speak. A protocol can be throught of as a language that both sides speak.
-Since there are typically many protocols that a system can speak, Bob (as the initiator) must send a
-protocol identifier. In the Tari protocol, this is a string containing the name of the protocol and the version
-e.g. `/tari/messaging/1.0.0`, but this can be any string that identified the protocol. If Bob knows how to speak
-`Tari messaging protocol v1.0.0`, the negotiation succeeds and the actor that has registered its interest
-in the protocol is notified and the conversation can begin. If not, Bob could try another protocol identifier or give up.
+If Bob wants to open a new substream, Bob asks Alice to open a new channel. As the initiator of the substream, he must send let Alice know the protocol he wants to speak. A
+protocol can be thought of as a language that both sides speak. Since there are typically many protocols that a system can speak, Bob (as the initiator) must send a protocol
+identifier. In the Tari protocol, this is a string containing the name of the protocol and the version e.g. `/tari/messaging/1.0.0`, but this can be any string that identifies the
+protocol. If Bob knows how to speak `Tari messaging protocol v1.0.0`, the negotiation succeeds and the actor that has registered its interest in the protocol is notified and the
+conversation can begin. If not, Bob could try another protocol identifier or give up.
 
 ### 4. Identity Exchange
 
@@ -173,7 +179,7 @@ Substreams are relatively low-level, so it makes sense to use them to build some
 a simple yet robust messaging interface. At the time of writing, this is the primary interface on which all base node,
 DHT and wallet messages are exchanged.
 
-At it's essence (putting aside pipelines which we'll discuss later), the interface to this protocol is:
+At its essence (putting aside pipelines which we'll discuss later), the interface to this protocol is:
 1. Send a message to a peer
 1. Message received from a peer
 
