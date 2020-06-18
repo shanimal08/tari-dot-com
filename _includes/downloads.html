@@ -39,8 +39,8 @@
                     </div>
                     {% endif %}
 
-                    {% if os.download %}
-                    <a class="btn " href="{{ site.baseurl}}/{{ os.download }}">{{os.ctaText}}</a>
+                    {% if os.downloadBtnID %}
+                    <a class="btn" id="{{ os.downloadBtnID }}">{{os.ctaText}}</a>
                     {% endif %}
 
                     {% if os.tutorial-video %}

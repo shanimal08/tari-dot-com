@@ -4,7 +4,7 @@
   title: Tari Base Node for Ubuntu
   subtitle: Download the binary, click through to install. Then you'll be
     automatically connected to the Tari blockchain.
-  download: binaries/tari_base_node-ubuntu-0.3.0.zip
+  downloadBtnID: linuxDL
   checksum: 6841be7f3efcdf0f0ef612d7675a6a96f65d5443d78f4c404a6ef9d3a6762a18
   version: Ubuntu 18.04 and higher
   source: https://github.com/tari-project/tari
@@ -22,7 +22,7 @@
   title: Tari Base Node for Mac
   subtitle: Download the binary, click through to install. Then you'll be
     automatically connected to the Tari blockchain.
-  download: binaries/tari_base_node-osx-10.15-0.3.0.pkg
+  downloadBtnID: osxDL
   checksum: 33c9e0289b680f1951e10b2bc7df899e3880c3039e4ebd44451e55eddfec4e4e
   version: MacOS 10.15.0 (Catalina) and higher
   source: https://github.com/tari-project/tari
@@ -39,7 +39,7 @@
   title: Tari Base Node for Windows
   subtitle: Download the binary, click through to install. Then you'll be
     automatically connected to the Tari blockchain.
-  download: binaries/tari_base_node-windows-0.3.0.exe
+  downloadBtnID: windowsDL
   checksum: f502cdeb58a1bc5de7e6d7f4cae7aeefaeb5a5958bd0ba436aad46806ce1dfb2
   version: Windows 10 and higher
   source: https://github.com/tari-project/tari
@@ -55,7 +55,7 @@
   elementTabButtonID: support-btn
   title: Tari Support Libraries
   subtitle: Additional miscellaneous binaries and files to enable developers.
-  download: null
+  downloadBtnID: null
   tutorial-video: null
   background-image: /assets/img/downloads/support.mp4
   video-poster: /assets/img/downloads/support.png
