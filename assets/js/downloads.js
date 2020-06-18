@@ -37,6 +37,51 @@ function removeClass(elems) {
 }
 
 jQuery(document).ready(function($) {
+  getS3Data()
+  //get data
+  function getS3Data() {
+    $.ajax({
+      url: Tari.s3BucketURL,
+      headers: { "Access-Control-Allow-Origin": "*" },
+      success: function(res) {
+        renderBinaries(res);
+      }
+    });
+  }
+
+  function renderBinaries(data) {
+    let binContainer = document.getElementById('libBinaries');
+
+
+    const dateOptions = { weekday: 'long', month: 'short', day: 'numeric' };
+
+
+    binContainer.innerHTML = data.files.map(( binary, index) => {
+
+      const lastMod = new Date(binary.lastModified);
+
+
+      const formattedDate = lastMod.toLocaleString(undefined, dateOptions);
+      const formattedTime = lastMod.getHours() + ':' + lastMod.getMinutes();
+
+      const altClass = index % 2 ? '' : 'alt-colour'
+
+      const path = binary.path.split("/").pop();
+
+      return (
+         `<div class="bin-row ${altClass}">
+            <div class="bin-row-item bin-left" scope="row">
+              <a href="${binary.url}">
+                ${path}
+              </a>
+              </div>
+            <div class="bin-row-item bin-right">${formattedDate} at ${formattedTime}</div>
+          </div>`
+      )
+    }).join('')
+
+  }
+
   function setInitialActive(os) {
     switch (os) {
       case "Mac OS":

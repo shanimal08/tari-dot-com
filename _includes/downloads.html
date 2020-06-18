@@ -35,7 +35,7 @@
                     {% if os.version %}
                     <div class="version">
                         For {{ os.version }}
-                       
+
                     </div>
                     {% endif %}
 
@@ -70,17 +70,19 @@
                     {% endif %}
                     {% if os.checksum %}
                     <div class="checksum">
-                        SHA256: {{ os.checksum }} 
-                        
+                        SHA256: {{ os.checksum }}
+
                     </div>
                     {% endif %}
 
-                    
+
                 </div>
                 <video class="dl-machine-img" muted autoplay playsinline poster="{{ site.baseurl }}{{os.video-poster}}">
                     <source src="{{ site.baseurl }}{{os.background-image}}" type="video/mp4">
                 </video>
             </div>
+
+            {% if os.type != "Libraries" %}
 
             <div class="past-versions-container">
                 <h2>Past {{ os.type }} Versions</h2>
@@ -114,6 +116,27 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
+
+            {% if os.type == "Libraries" %}
+            <div class="past-versions-container">
+                <h2>Past Versions</h2>
+
+                <div class="binaries-container">
+                    <div class="bin-headers">
+                        <div class="bin-header">
+                            <div class="header-text">Filename</div>
+                        </div>
+                        <div class="bin-header">
+                            <div class="header-text">Last modified</div>
+                        </div>
+                    </div>
+                    <div id="libBinaries" class="bin-content">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
         </div>
     {% endfor %}
 </div>
