@@ -5,8 +5,10 @@ function getTelegramData() {
     success: function(res) {
       const { online = "" } = res;
       const telegramCountEl = document.getElementById("telegram-counter");
+      const mobileTelegramCountEl = document.getElementById("mobile-telegram-counter");
       if (telegramCountEl) {
-        telegramCountEl.innerText = online.trim();
+        telegramCountEl.innerText = online.trim() + " PEOPLE ONLINE";
+        mobileTelegramCountEl.innerText = online.trim() + " PEOPLE ONLINE";
       }
     }
   });

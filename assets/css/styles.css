@@ -493,6 +493,16 @@ lottie-player {
   background-image: url("../img/social-twitter.svg");
   width: 2.5rem;
 }
+#viewport #social ul li a[href*="youtube"],
+#viewport #mobileSocial ul li a[href*="youtube"] {
+  background-image: url("../img/social-youtube.svg");
+  width: 2.5rem;
+}
+#viewport #social ul li a[href*="substack"],
+#viewport #mobileSocial ul li a[href*="substack"] {
+  background-image: url("../img/social-substack.svg");
+  width: 2rem;
+}
 #viewport #social ul li a[href*="github"],
 #viewport #mobileSocial ul li a[href*="github"] {
   background-image: url("../img/social-github.svg");
@@ -520,16 +530,27 @@ lottie-player {
 }
 
 .telegram-counter{
-  position: absolute;
-       top: -28px;
-    left: 42px;
-    background: #0189CD;
-    border-radius: 25px;
-    padding: 1px 3px;
-    color: white;
-    font-weight: bold;
-  
-    text-align: center;
+    color: #0088CC;
+    font-weight: bold; 
+}
+
+.telegram-button{
+  border: #0088CC 2px solid;
+  width: 22rem;
+ display: flex;
+  padding: 10px 0px 10px 0px;
+  border-radius: 3px;
+  margin: 3rem 0 0 3rem;
+
+}
+
+.telegram-button p{
+  color: #0088CC;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: Avenir-Black, "Avenir-Black", "Myriad Pro", Arial, Verdana;
+  text-transform: uppercase;
+  margin-bottom: 0px;
 }
 
 .telegram-counter-container{
@@ -539,7 +560,7 @@ lottie-player {
 .ring-container {
     position: relative;
         top: -51px;
-    left: -10px;
+    left: -25px;
 }
 
 .circle {
@@ -1812,6 +1833,13 @@ body.page- #call-to-action {
     margin-top: 1px;
 }
 
+.nav-explorer-icon{
+  position: absolute;
+  max-width: 15px;
+      margin-left: 6px;
+    margin-top: 1px;
+}
+
 .tari-for-creators {
   margin-bottom: 10rem;
 }
@@ -2032,6 +2060,96 @@ body.page- #call-to-action {
 
 
   }
+
+   /* Block Explorer */
+
+    .home-block-explorer-container{
+       background: #2c1f6e;
+    box-shadow: 0 30px 30px 0 rgba(78,19,126,0.2);
+    border-radius: 10px;
+    padding: 60px;
+    margin-top: 100px;
+    margin-bottom: 200px;
+   position: relative;
+   min-height: 360px;
+   max-height: 400px;
+   height: 100%;
+   overflow: hidden;
+   margin-left: 0;
+   margin-right: 0;
+   color:white !important;
+
+  }
+
+  .home-block-explorer-container p{
+    color:white !important;
+  }
+
+  .home-block-explorer-container video{
+    max-width: 680px;
+    position: absolute;
+    bottom: 40px;
+  }
+
+  .home-block-explorer-container .btn{
+    width: 100%;
+    white-space: unset !important;
+    height: unset !important;
+  }
+
+  .home-block-explorer-container h2{
+    margin: unset !important;
+  }
+
+  .home-block-explorer-container img{
+    position: absolute;
+    max-width: 680px !important;
+    bottom:40px;
+
+  }
+
+  .home-block-explorer-copy{
+    display: flex;
+  }
+
+
+  @media only screen and (max-width: 576px){
+
+      .home-block-explorer-copy{
+        text-align: center;
+    margin-left: 0px;
+    margin: 0 auto;
+        width: 100%;
+    margin-bottom: 40px !important;
+  }
+
+  .home-block-explorer-container h2{
+    text-align: center;
+    width: 100%;
+  }
+
+     .home-block-explorer-container{
+      text-align: center !important;
+      display: block;
+      padding: 40px;
+      margin-top: 50px;
+      min-height: 480px;
+
+    }
+
+    .home-block-explorer-container video{
+    position: absolute;
+    max-width: 900px !important;
+    bottom:40px;
+    left: 40px;
+
+  }
+  }
+
+
+
+
+
 
   /* Downloads */
 
