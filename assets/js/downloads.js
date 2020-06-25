@@ -44,14 +44,45 @@ jQuery(document).ready(function($) {
       url: Tari.s3BucketURL,
       headers: { "Access-Control-Allow-Origin": "*" },
       success: function(res) {
-        renderBinaries(res.files);
+        groupDataByOs(res.files);
         setLatest(res.latest);
       }
     });
   }
 
-  function renderBinaries(data) {
-    let binContainer = document.getElementById('libBinaries');
+  function groupDataByOs(data) {
+    let linux = [];
+    let windows =  [];
+    let osx = [];
+    let libWallet = [];
+    let sortedFiles = {}
+
+    data.forEach((file)=> {
+      const type = file.path.split('/')[0];
+      switch (type) {
+        case 'linux':
+          linux.push(file);
+          break;
+        case 'windows':
+          windows.push(file)
+          break;
+        case 'osx':
+          osx.push(file);
+          break;
+        default:
+         libWallet.push(file);
+      }
+       sortedFiles = {
+        linux, windows, osx, libWallet
+      }
+    })
+    Object.keys(sortedFiles).forEach((os)=>{
+      renderBinaries(sortedFiles[os], os)
+    })
+  }
+
+  function renderBinaries(data, os) {
+    let binContainer = document.getElementById(`${os}BinID`);
     const dateOptions = { weekday: 'long', month: 'short', day: 'numeric' };
 
     binContainer.innerHTML = data.map(( binary, index) => {
@@ -61,16 +92,16 @@ jQuery(document).ready(function($) {
       const altClass = index % 2 ? '' : 'alt-colour'
       const path = binary.path.split("/").pop();
 
-      return (
-         `<div class="bin-row ${altClass}">
-            <div class="bin-row-item bin-left" scope="row">
-              <a href="${binary.url}">
-                ${path}
-              </a>
-              </div>
-            <div class="bin-row-item bin-right">${formattedDate} at ${formattedTime}</div>
-          </div>`
-      )
+        return (
+           `<div class="bin-row ${altClass}">
+              <div class="bin-row-item bin-left" scope="row">
+                <a href="${binary.url}">
+                  ${path}
+                </a>
+                </div>
+              <div class="bin-row-item bin-right">${formattedDate} at ${formattedTime}</div>
+            </div>`
+        )
     }).join('')
   }
 

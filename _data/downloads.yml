@@ -1,5 +1,6 @@
 - type: Ubuntu
   elementID: ubuntu
+  binaryDivID: linuxBinID
   elementTabButtonID: ubuntu-btn
   title: Tari Base Node for Ubuntu
   subtitle: Download the binary, click through to install. Then you'll be
@@ -18,6 +19,7 @@
   filter_spec: ubuntu
 - type: Mac
   elementID: mac
+  binaryDivID: osxBinID
   elementTabButtonID: mac-btn
   title: Tari Base Node for Mac
   subtitle: Download the binary, click through to install. Then you'll be
@@ -35,6 +37,7 @@
   filter_spec: osx-10.15
 - type: Windows
   elementID: windows
+  binaryDivID: windowsBinID
   elementTabButtonID: windows-btn
   title: Tari Base Node for Windows
   subtitle: Download the binary, click through to install. Then you'll be
@@ -52,6 +55,7 @@
   filter_spec: windows
 - type: Libraries
   elementID: support
+  binaryDivID: libWalletBinID
   elementTabButtonID: support-btn
   title: Tari Support Libraries
   subtitle: Additional miscellaneous binaries and files to enable developers.

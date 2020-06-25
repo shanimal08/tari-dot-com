@@ -82,43 +82,7 @@
                 </video>
             </div>
 
-            {% if os.type != "Libraries" %}
 
-            <div class="past-versions-container">
-                <h2>Past {{ os.type }} Versions</h2>
-
-
-                {% assign binaries = site.collections | where:'label', 'binaries' | first %}
-                <div class="binaries-container">
-                    <div class="bin-headers">
-                        <div class="bin-header">
-                            <div class="header-text">Filename</div>
-                        </div>
-                        <div class="bin-header">
-                            <div class="header-text">Last modified</div>
-                        </div>
-                    </div>
-                    <div class="bin-content">
-                        {% assign sorted = binaries.files | sort: 'path' %}
-                        {% for file in sorted %}
-                        {% if file.name contains os.filter_spec %}
-                        {% assign mod2 = forloop.index | modulo: 2 %}
-
-                        <div class="bin-row {% if mod2 != 0 %} alt-colour {% endif %}">
-                            <div class="bin-row-item bin-left" scope="row">
-                                <a href="/{{ file.path | remove_first: '_' }}">{{ file.name }}</a>
-                                {{ bin }}
-                            </div>
-                            <div class="bin-row-item bin-right">{{ file.modified_time | date: '%A, %e %b at %k:%M' }}</div>
-                        </div>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-
-            {% if os.type == "Libraries" %}
             <div class="past-versions-container">
                 <h2>Past Versions</h2>
 
@@ -131,11 +95,10 @@
                             <div class="header-text">Last modified</div>
                         </div>
                     </div>
-                    <div id="libBinaries" class="bin-content">
+                    <div id="{{ os.binaryDivID }}" class="bin-content">
                     </div>
                 </div>
             </div>
-            {% endif %}
 
         </div>
     {% endfor %}
