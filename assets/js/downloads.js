@@ -77,8 +77,20 @@ jQuery(document).ready(function($) {
   function setLatest(data) {
     Object.keys(data).forEach((os) => {
       if (os !== 'libwallet'){
+
         let btn = document.getElementById(`${os}DL`);
+        let checkSumDiv = document.getElementById(`${os}CSID`);
+
+        let sha256 = "";
+        let checksum = data[os].sha256;
+
+        if (checksum) {
+          sha256 = checksum.split(" ")[0];
+        }
+
         btn.href = data[os].url;
+
+        checkSumDiv.innerHTML = checksum ? `SHA256: ${sha256}` : "";
       }
     })
   }

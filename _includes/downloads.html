@@ -68,12 +68,12 @@
                         <br/><br/>
                     </a>
                     {% endif %}
-                    {% if os.checksum %}
-                    <div class="checksum">
-                        SHA256: {{ os.checksum }}
 
-                    </div>
+                    {% if os.checksumDivID %}
+                    <div id="{{ os.checksumDivID }}" class="checksum"></div>
                     {% endif %}
+
+
 
 
                 </div>
