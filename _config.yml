@@ -27,8 +27,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.tari.com/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: tari
 github_username:  tari-project
-issue_cache_url: "https://gh-cache.tari.com/issues"
-telegram_cache_url: "https://gh-cache.tari.com/telegram"
+tari_cache_url: "https://gh-cache.tari.com"
+
 
 ios_github_issues: "https://github.com/tari-project/wallet-ios/issues"
 protocol_github_issues: "https://github.com/tari-project/tari/issues"

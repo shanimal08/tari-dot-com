@@ -1,2 +1,1 @@
-issue_cache_url: "http://localhost:3000/issues"
-binaries_url: "http://localhost:3000/s3"
+tari_cache_url: "http://localhost:3000"

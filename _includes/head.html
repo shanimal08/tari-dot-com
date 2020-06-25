@@ -57,9 +57,9 @@
    const Tari = {
       baseurl: '{{ site.baseurl }}',
       url: '{{ site.url }}',
-      issuesCachingURL: '{{ site.issue_cache_url }}',
-      s3BucketURL: '{{ site.binaries_url }}',
-      telegramCachingURL: '{{ site.telegram_cache_url }}',
+      issuesCachingURL: '{{ site.tari_cache_url }}/issues',
+      s3BucketURL: '{{ site.tari_cache_url }}/s3',
+      telegramCachingURL: '{{ site.tari_cache_url }}/telegram',
       githubIssuesPlaceholder: {
           "tari-project/tari": {
               "total": 0,
