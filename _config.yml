@@ -37,6 +37,7 @@ aurora_url: "https://aurora.tari.com/"
 # Build settings
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 include:
   - assets/js/

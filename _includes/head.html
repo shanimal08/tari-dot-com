@@ -13,6 +13,8 @@
 <meta property="og:image" content="{{ site.url }}assets/img/meta-image.jpg">
 <meta property="og:url" content="{{ site.url }}">
 
+<meta itemprop="description" name="description" content="{% if page.description %}{{ page.description | truncate: 160 }}{% else %}{{ site.description | truncate: 160  }}{% endif %}" />
+
 <meta name="twitter:title" content="Tari">
 <meta name="twitter:description" content="The protocol for digital assets">
 <meta name="twitter:image" content="{{ site.url }}assets/img/meta-image.jpg">
